@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,4 +34,11 @@ public class TestController {
 		System.err.println("TestController.getCookie()");
 		return new ResultBean("getCookie "+cookie1);
 	}
+	
+	@GetMapping("/getHeader")
+	public ResultBean getHeader(@RequestHeader("x-header1")String header1,@RequestHeader("x-header2")String header2) {
+		System.err.println("TestController.getHeader()");
+		return new ResultBean("getHeader "+header1+" "+header2);
+	}
+	
 }

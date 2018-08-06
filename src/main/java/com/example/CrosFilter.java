@@ -30,10 +30,26 @@ public class CrosFilter implements Filter {
 		// TODO Auto-generated method stub
 
 	  HttpServletResponse res=(HttpServletResponse) arg1;
+	  HttpServletRequest req=(HttpServletRequest)arg0;
+	  
+	  String origin=req.getHeader("Origin");
+	  
+	  if(!org.springframework.util.StringUtils.isEmpty(origin)) {
+		  //带cookie的时候，origin必须是全匹配，不能使用*
+		  res.addHeader("Access-Control-Allow-Origin",origin);
+	  }
 	  //带cookie的时候，origin必须是全匹配，不能使用*
-	  res.addHeader("Access-Control-Allow-Origin","http://localhost:8081");
+	 // res.addHeader("Access-Control-Allow-Origin","http://localhost:8081");
 	  res.addHeader("Access-Control-Allow-Methods","*");
-	  res.addHeader("Access-Control-Request-Headers","Content-type");
+	  
+	  String headers=req.getHeader("Access-Control-Request-Headers");
+	  //支持所有自定义头
+	  if(!org.springframework.util.StringUtils.isEmpty(headers)) {
+		  
+		 // res.addHeader("Access-Control-Allow-Headers","Content-type,x-header1,x-header2");
+		  res.addHeader("Access-Control-Allow-Headers",headers);
+	  }
+	 
 	  res.addHeader("Access-Control-Max-Age","3600");
 	  //enable cookie
 	  res.addHeader("Access-Control-Allow-Credentials","true");
