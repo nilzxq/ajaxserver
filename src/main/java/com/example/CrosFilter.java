@@ -30,8 +30,9 @@ public class CrosFilter implements Filter {
 		// TODO Auto-generated method stub
 
 	  HttpServletResponse res=(HttpServletResponse) arg1;
-	  res.addHeader("Access-Control-Allow-Origin","http://localhost:8081");
-	  res.addHeader("Access-Control-Allow-Methods","GET");
+	  res.addHeader("Access-Control-Allow-Origin","*");
+	  res.addHeader("Access-Control-Allow-Methods","*");
+	  res.addHeader("Access-Control-Request-Headers","Content-type");
 	  arg2.doFilter(arg0,arg1);
 	}
 
