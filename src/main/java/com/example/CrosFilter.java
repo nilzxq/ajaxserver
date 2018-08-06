@@ -30,9 +30,14 @@ public class CrosFilter implements Filter {
 		// TODO Auto-generated method stub
 
 	  HttpServletResponse res=(HttpServletResponse) arg1;
-	  res.addHeader("Access-Control-Allow-Origin","*");
+	  //带cookie的时候，origin必须是全匹配，不能使用*
+	  res.addHeader("Access-Control-Allow-Origin","http://localhost:8081");
 	  res.addHeader("Access-Control-Allow-Methods","*");
 	  res.addHeader("Access-Control-Request-Headers","Content-type");
+	  res.addHeader("Access-Control-Max-Age","3600");
+	  //enable cookie
+	  res.addHeader("Access-Control-Allow-Credentials","true");
+	 
 	  arg2.doFilter(arg0,arg1);
 	}
 
